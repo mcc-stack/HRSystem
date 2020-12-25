@@ -1,0 +1,20 @@
+.index-header {
+  padding: 10px;
+  display: flex;
+  .canlendar {
+    width: 400px;
+    background-color: #fff;
+    p {
+      text-align: left;
+      color: rgb(161, 155, 155);
+      font-size: 16px;
+      padding-left: 20px;
+      margin-top: 15px;
+      margin-bottom: -20px;
+    }
+  }
+}
+
+.work {
+  flex: 1;
+}

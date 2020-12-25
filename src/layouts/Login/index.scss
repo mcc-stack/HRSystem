@@ -1,0 +1,21 @@
+.login-layout {
+  height: 100%;
+  width: 100%;
+  background: url('https://img.alicdn.com/tfs/TB1L.owp1H2gK0jSZJnXXaT1FXa-2880-1770.png')
+    no-repeat;
+  background-size: cover;
+  position: relative;
+}
+.form {
+  position: absolute;
+  width: 400px;
+  border: 1px solid #ccc;
+  padding: 20px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.login-form-button {
+  width: 100%;
+}

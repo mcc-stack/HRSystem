@@ -1,0 +1,91 @@
+{
+  "login": [
+    {
+      "user": "admin",
+      "password": "123456",
+      "id": 1
+    },
+    {
+      "mobile": "13800000002",
+      "password": "123456",
+      "id": 2
+    }
+  ],
+  "company": [
+    {
+      "key": "1",
+      "name": "企业1",
+      "version": "试用版1.0",
+      "companyPhone": "17816077932",
+      "expirationDate": "2021-01-01",
+      "status": 0,
+      "address": "New York No. 1 Lake Park"
+    },
+    {
+      "key": "2",
+      "name": "企业2",
+      "version": "试用版2.0",
+      "companyPhone": "17816077932",
+      "expirationDate": "2021-01-01",
+      "status": 1,
+      "address": "New York No. 1 Lake Park"
+    },
+    {
+      "key": "3",
+      "name": "企业3",
+      "version": "试用版3.0",
+      "companyPhone": "17816077932",
+      "expirationDate": "2021-01-01",
+      "status": 1,
+      "address": "New York No. 1 Lake Park"
+    },
+    {
+      "key": "4",
+      "name": "企业4",
+      "version": "试用版1.0",
+      "companyPhone": "17816077932",
+      "expirationDate": "2021-01-01",
+      "status": 0,
+      "address": "New York No. 1 Lake Park"
+    },
+    {
+      "key": "5",
+      "name": "企业5",
+      "version": "试用版1.0",
+      "companyPhone": "17816077932",
+      "expirationDate": "2021-01-01",
+      "status": 1,
+      "address": "New York No. 1 Lake Park"
+    }
+  ],
+  "staff": [
+    {
+      "id": "1232",
+      "name": "黎雅致1",
+      "phone": "17815877611",
+      "jobNumber": "1002",
+      "department": "测试部"
+    },
+    {
+      "id": "1232",
+      "name": "郑宏坤2",
+      "phone": "17815877671",
+      "jobNumber": "1002",
+      "department": "测试部"
+    },
+    {
+      "id": "1232",
+      "name": "黎雅致3",
+      "phone": "17815877633",
+      "jobNumber": "1002",
+      "department": "测试部"
+    },
+    {
+      "id": "1232",
+      "name": "黎雅致4",
+      "phone": "17815877632",
+      "jobNumber": "1002",
+      "department": "测试部"
+    }
+  ]
+}
