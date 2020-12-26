@@ -4,5 +4,10 @@ function onPanelChange(value: any, mode: any) {
 }
 export const Canlenadar = () => {
   <p>工作日历</p>;
-  return <Calendar fullscreen={false} onPanelChange={onPanelChange}></Calendar>;
+  return (
+    <Calendar
+      fullscreen={false}
+      onPanelChange={onPanelChange}
+      style={{ padding: '20px' }}></Calendar>
+  );
 };

@@ -2,19 +2,13 @@ import React, { FC, Suspense, useState } from 'react';
 import { Link, Redirect, Route } from 'react-router-dom';
 import './index.scss';
 import { Layout, Menu, Avatar, Dropdown } from 'antd';
-import {
-  MenuUnfoldOutlined,
-  MenuFoldOutlined,
-  UserOutlined,
-  UploadOutlined,
-  DesktopOutlined,
-  ControlOutlined
-} from '@ant-design/icons';
-import { MenuDown } from './components';
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
+import { MenuDown } from './components/menu-down';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { routes } from '../../router';
+import routes from '../../router.tsx';
 import { Loading } from '../../components/Loading';
 import { Content } from 'antd/lib/layout/layout';
+// import { NotFound } from '../../views/not-found';
 const { Header, Sider } = Layout;
 
 const BasicLayout: FC = () => {
@@ -62,49 +56,39 @@ const BasicLayout: FC = () => {
               onClick: () => setColl(!coll)
             })}
           </div>
-          <Menu mode='inline' defaultSelectedKeys={['1']}>
-            <Menu.Item key='1' icon={<DesktopOutlined />}>
-              <Link key={'/basic'} to='/basic'>
-                首页
-              </Link>
-            </Menu.Item>
-            <Menu.Item key='2' icon={<ControlOutlined />}>
-              <Link key={'/basic/sass'} to='/basic/sass'>
-                Sass
-              </Link>
-            </Menu.Item>
-            <Menu.Item key='3' icon={<UploadOutlined />}>
-              <Link key={'/basic/group'} to='/basic/group'>
-                组织架构
-              </Link>
-            </Menu.Item>
-            <Menu.Item key='4' icon={<UserOutlined />}>
-              <Link key={'/basic/staff'} to='/basic/staff'>
-                员工
-              </Link>
-            </Menu.Item>
+          <Menu mode='inline' defaultSelectedKeys={['/basic/']}>
+            {routes.map(({ path, icon, text }) => (
+              <Menu.Item key={path} icon={icon}>
+                <Link to={path}>{text}</Link>
+              </Menu.Item>
+            ))}
           </Menu>
         </Sider>
         <Content className='content'>
           <TransitionGroup appear>
             <Suspense fallback={<Loading />}>
-              {routes.map(({ path, Component }) => (
-                <Route key={path} exact path={path}>
-                  {({ match }) => (
-                    <CSSTransition
-                      in={match != null}
-                      timeout={300}
-                      classNames='page'
-                      unmountOnExit>
-                      <div className='page'>
-                        <Component />
-                      </div>
-                    </CSSTransition>
-                  )}
-                </Route>
-              ))}
+              {routes.map(({ path, Component }) => {
+                console.log('path', path);
+                return (
+                  <Route key={path} exact path={path}>
+                    {({ match }) => (
+                      <CSSTransition
+                        in={match != null}
+                        timeout={300}
+                        classNames='page'
+                        unmountOnExit>
+                        <div className='page'>
+                          <Component />
+                        </div>
+                      </CSSTransition>
+                    )}
+                  </Route>
+                );
+              })}
             </Suspense>
           </TransitionGroup>
+          {/* <Route exact path={'/basic/404'} children={<NotFound />} />
+          <Redirect to='/basic/404' /> */}
         </Content>
       </Layout>
     </Layout>

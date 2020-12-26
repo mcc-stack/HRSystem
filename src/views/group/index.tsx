@@ -1,4 +1,5 @@
 import { Table, Tag, Space } from 'antd';
+import { BreadNav } from '../../components/BreadNav';
 import './index.scss';
 const columns = [
   {
@@ -84,6 +85,7 @@ const Group = () => {
   ];
   return (
     <section className='group-container'>
+      <BreadNav text={'组织架构'} />
       <Table columns={columns} dataSource={data} className='table' />
     </section>
   );
