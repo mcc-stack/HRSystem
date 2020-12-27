@@ -22,7 +22,7 @@ interface routesConfig {
 
 const routes: routesConfig[] = [
   {
-    path: '/basic/',
+    path: '/basic',
     text: '首页',
     icon: <DesktopOutlined />,
     Component: lazy(() => import('./views/index'))

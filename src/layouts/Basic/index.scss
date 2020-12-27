@@ -18,14 +18,22 @@
     justify-self: flex-end;
   }
 }
+
 .basic-layout {
   min-height: 100vh;
 }
+
 .logo {
   height: 64px;
   overflow: hidden;
 }
-
+.page {
+  position: absolute;
+  top: 20px;
+  left: 15px;
+  right: 20px;
+  bottom: 20px;
+}
 .page-enter {
   opacity: 0;
   transform: translateX(100px);
@@ -51,13 +59,6 @@
   transition: all 500ms ease-out;
 }
 
-.page {
-  position: absolute;
-  top: 20px;
-  left: 15px;
-  right: 20px;
-}
-
 .collos {
   position: absolute;
   right: 0;
@@ -73,5 +74,5 @@
 
 .content {
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
 }

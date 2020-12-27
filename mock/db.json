@@ -44,6 +44,21 @@
       "mobile": "13800000002",
       "password": "123456",
       "id": 9
+    },
+    {
+      "mobile": "13800000002",
+      "password": "123456",
+      "id": 10
+    },
+    {
+      "mobile": "13800000002",
+      "password": "123456",
+      "id": 11
+    },
+    {
+      "mobile": "13800000002",
+      "password": "123456",
+      "id": 12
     }
   ],
   "company": [
@@ -95,32 +110,59 @@
   ],
   "staff": [
     {
-      "id": "1232",
-      "name": "黎雅致1",
-      "phone": "17815877611",
-      "jobNumber": "1002",
-      "department": "测试部"
+      "userId": "124312312",
+      "id": "124312312",
+      "username": "郑宏坤",
+      "departmentName": "研发部",
+      "mobile": "17811877611",
+      "timeOfEntry": "2019-03-01",
+      "sex": "男",
+      "edu": "本科",
+      "nationArea": "中国大陆"
     },
     {
-      "id": "1232",
-      "name": "郑宏坤2",
-      "phone": "17815877671",
-      "jobNumber": "1002",
-      "department": "测试部"
+      "userId": "1212132",
+      "id": "1212132",
+      "username": "郑宏坤",
+      "departmentName": "研发部",
+      "mobile": "17811877611",
+      "timeOfEntry": "2019-03-01",
+      "sex": "男",
+      "edu": "本科",
+      "nationArea": "中国大陆"
     },
     {
-      "id": "1232",
-      "name": "黎雅致3",
-      "phone": "17815877633",
-      "jobNumber": "1002",
-      "department": "测试部"
+      "userId": "123323123",
+      "id": "123323123",
+      "username": "郑宏坤",
+      "departmentName": "研发部",
+      "mobile": "17811877611",
+      "timeOfEntry": "2019-03-01",
+      "sex": "男",
+      "edu": "本科",
+      "nationArea": "中国大陆"
     },
     {
-      "id": "1232",
-      "name": "黎雅致4",
-      "phone": "17815877632",
-      "jobNumber": "1002",
-      "department": "测试部"
+      "userId": "1231122321",
+      "id": "1231122321",
+      "username": "郑宏坤",
+      "departmentName": "研发部",
+      "mobile": "17811877611",
+      "timeOfEntry": "2019-03-01",
+      "sex": "男",
+      "edu": "本科",
+      "nationArea": "中国大陆"
+    },
+    {
+      "username": "zhk",
+      "userId": "wqewq",
+      "departmentName": "sa",
+      "sex": "wewq",
+      "mobile": "qqew",
+      "edu": "we",
+      "nationArea": "WEW",
+      "timeOfEntry": "2321321",
+      "id": "wqewq"
     }
   ]
 }

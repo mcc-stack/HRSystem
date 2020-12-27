@@ -13,6 +13,9 @@ const { Header, Sider } = Layout;
 
 const BasicLayout: FC = () => {
   const [coll, setColl] = useState<boolean>(false);
+  const current = window.sessionStorage.getItem('default')
+    ? window.sessionStorage.getItem('default')
+    : '/basic';
   if (!window.sessionStorage.getItem('token')) {
     return <Redirect to='/login' />;
   }
@@ -56,7 +59,13 @@ const BasicLayout: FC = () => {
               onClick: () => setColl(!coll)
             })}
           </div>
-          <Menu mode='inline' defaultSelectedKeys={['/basic/']}>
+          <Menu
+            mode='inline'
+            defaultSelectedKeys={[current as string]}
+            onClick={e => {
+              console.log(e.key);
+              window.sessionStorage.setItem('default', e.key as string);
+            }}>
             {routes.map(({ path, icon, text }) => (
               <Menu.Item key={path} icon={icon}>
                 <Link to={path}>{text}</Link>
@@ -68,7 +77,6 @@ const BasicLayout: FC = () => {
           <TransitionGroup appear>
             <Suspense fallback={<Loading />}>
               {routes.map(({ path, Component }) => {
-                console.log('path', path);
                 return (
                   <Route key={path} exact path={path}>
                     {({ match }) => (
