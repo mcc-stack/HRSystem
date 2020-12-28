@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { BreadNav } from '../../components/BreadNav';
 import { Button, Form, Input, Modal, Table } from 'antd';
 import useStaff from './useStaff';
@@ -9,35 +9,18 @@ const Staff: FC = () => {
     columns,
     height,
     search,
-    addStaff,
-    loading
+    loading,
+    editForm,
+    editVisible,
+    handleEditCancel,
+    handleEditOk,
+    confirmLoading,
+    addForm,
+    showAddUserModal,
+    addVisible,
+    handleAddOk,
+    handleAddCancel
   } = useStaff();
-
-  const [form] = Form.useForm();
-  const [visible, setVisible] = useState(false);
-  const showUserModal = () => {
-    setVisible(true);
-  };
-  const [confirmLoading, setConfirmLoading] = useState(false);
-
-  const handleOk = async () => {
-    setConfirmLoading(true);
-    try {
-      await form.validateFields();
-      const fields = form.getFieldsValue();
-      addStaff({ ...fields, id: fields.userId });
-      setConfirmLoading(false);
-      setVisible(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleCancel = () => {
-    console.log('Clicked cancel button');
-    setVisible(false);
-  };
-
   return (
     <section>
       <BreadNav text={'员工管理'} />
@@ -57,7 +40,7 @@ const Staff: FC = () => {
           <Button
             type='primary'
             style={{ marginRight: 20 }}
-            onClick={showUserModal}>
+            onClick={showAddUserModal}>
             新增员工
           </Button>
           <Button type='primary'>导出Excel</Button>
@@ -67,16 +50,70 @@ const Staff: FC = () => {
         columns={columns}
         dataSource={data}
         loading={loading}
-        scroll={{ x: 1500, y: height }}
+        scroll={{ x: 1500, y: height.current }}
+        pagination={{
+          pageSize: 6,
+          showTotal: total => <span>总共{total}条</span>
+        }}
       />
       {/* 新增员工对话框 */}
       <Modal
         title='增加员工'
-        visible={visible}
-        onOk={handleOk}
+        okText='确定'
+        cancelText='取消'
+        visible={addVisible}
+        onOk={handleAddOk}
         confirmLoading={confirmLoading}
-        onCancel={handleCancel}>
-        <Form form={form}>
+        onCancel={handleAddCancel}>
+        <Form form={addForm}>
+          <Form.Item
+            name='username'
+            label='员工姓名'
+            rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name='userId' label='工号' rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name='departmentName'
+            label='部门名'
+            rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name='sex' label='性别' rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name='mobile' label='电话号' rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item name='edu' label='学历' rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name='nationArea'
+            label='区域'
+            rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item
+            name='timeOfEntry'
+            label='入职时间'
+            rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+        </Form>
+      </Modal>
+      {/* 修改员工对话框 */}
+      <Modal
+        title='修改员工'
+        okText='确定'
+        cancelText='取消'
+        visible={editVisible}
+        onOk={handleEditOk}
+        confirmLoading={confirmLoading}
+        onCancel={handleEditCancel}>
+        <Form form={editForm}>
           <Form.Item
             name='username'
             label='员工姓名'

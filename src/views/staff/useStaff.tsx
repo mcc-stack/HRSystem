@@ -1,6 +1,6 @@
-import { Button, message, Popconfirm } from 'antd';
+import { Button, Form, message, Popconfirm } from 'antd';
 import { ColumnsType } from 'antd/lib/table';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import request from '../../api/request';
 interface staffListType {
   userId: string;
@@ -14,15 +14,19 @@ interface staffListType {
 }
 export default function useStaff() {
   const [staffData, setData] = useState<staffListType[]>([]);
-  const [loading,setLoading] = useState<boolean>(true);
-  const height = useMemo(() => window.innerHeight - 300, []);
-
+  const [loading, setLoading] = useState<boolean>(true);
+  const [addForm] = Form.useForm();
+  const [editForm] = Form.useForm();
+  const [editVisible, setEditVisible] = useState(false);
+  const [addVisible, setAddVisible] = useState(false);
+  const height = useRef(window.innerHeight - 300);
   const columns: ColumnsType<staffListType> = [
     {
       title: '员工姓名',
       width: 50,
       dataIndex: 'username',
       key: 'username',
+
       fixed: 'left'
     },
     {
@@ -75,7 +79,12 @@ export default function useStaff() {
       render: (staff: staffListType) => {
         return (
           <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <Button>编辑</Button>
+            <Button
+              onClick={() => {
+                showEditUserModal(staff.userId);
+              }}>
+              编辑
+            </Button>
             <Popconfirm
               placement='bottomRight'
               title='此操作将删除该用户,是否继续'
@@ -94,12 +103,18 @@ export default function useStaff() {
     }
   ];
 
-  async function getStaff() {
+  async function getStaff(id?: string) {
     try {
-      const { data } = await request.get('/staff');
-      data.forEach((item: any) => (item.key = item.userId));
-      setData(data);
-      setLoading(false)
+      if (id) {
+        const { data } = await request.get(`/staff/${id}`);
+        console.log(data);
+        editForm.setFieldsValue(data);
+      } else {
+        const { data } = await request.get('/staff');
+        data.forEach((item: any) => (item.key = item.userId));
+        setData(data);
+        setLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -143,9 +158,79 @@ export default function useStaff() {
       console.log(error);
     }
   }
+  async function updateStaff(userId: string, staffInfo: any) {
+    try {
+      const { data } = await request.put(`/staff/${userId}`, staffInfo);
+      if (data.code !== 403) {
+        message.success('修改员工信息成功!', 3);
+        getStaff();
+      } else {
+        message.success('修改员工信息失败,你没有这个权限!', 3);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
+  function showEditUserModal(userId: string) {
+    getStaff(userId);
+    setEditVisible(true);
+  }
+  function showAddUserModal() {
+    setAddVisible(true);
+  }
+  const [confirmLoading, setConfirmLoading] = useState(false);
+
+  const handleEditOk = async () => {
+    setConfirmLoading(true);
+    try {
+      await editForm.validateFields();
+      const fields = editForm.getFieldsValue();
+      updateStaff(fields.userId, { ...fields });
+      setConfirmLoading(false);
+      setEditVisible(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleAddOk = async () => {
+    setConfirmLoading(true);
+    try {
+      await addForm.validateFields();
+      const fields = addForm.getFieldsValue();
+      addStaff({ ...fields, id: fields.userId });
+      setConfirmLoading(false);
+      setAddVisible(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const handleEditCancel = () => {
+    setEditVisible(false);
+  };
+  const handleAddCancel = () => {
+    setAddVisible(false);
+  };
   useEffect(() => {
     getStaff();
   }, []);
-  return { height, staffData, columns, search, delStaff, addStaff,loading };
+  return {
+    height,
+    staffData,
+    columns,
+    search,
+    delStaff,
+    loading,
+    editForm,
+    editVisible,
+    showEditUserModal,
+    confirmLoading,
+    handleEditOk,
+    handleEditCancel,
+    addForm,
+    addVisible,
+    showAddUserModal,
+    handleAddOk,
+    handleAddCancel
+  };
 }

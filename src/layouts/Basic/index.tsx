@@ -19,6 +19,7 @@ const BasicLayout: FC = () => {
   if (!window.sessionStorage.getItem('token')) {
     return <Redirect to='/login' />;
   }
+
   return (
     <Layout className='basic-layout'>
       <Header className='site-header' style={{ paddingLeft: 0 }}>
